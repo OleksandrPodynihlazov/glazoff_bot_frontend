@@ -1,38 +1,208 @@
-.App {
-  text-align: center;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #dcd6f7; /* Світлий синій фон */
+  color: #333;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.app {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Шапка */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #4e4c67; /* Темно-синій колір шапки */
+  color: white;
+  padding: 10px 20px;
+}
+
+.header .logo img {
+  height: 50px;
+}
+
+.header .contacts p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Основний контейнер */
+.container {
+  flex: 1;
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #4e4c67; /* Темно-синій заголовок */
+}
+
+/* Сітка послуг */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Три колонки */
+  gap: 20px;
+}
+
+/* Карточка послуги */
+.service-card {
+  background-color: white;
+  border: 1px solid #b4869f; /* Рамка відтінку синього */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+}
+
+.service-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background-color: #a6b1e1; /* Фон для випадків, якщо зображення не завантажиться */
+}
+
+.service-details {
+  padding: 15px;
+  text-align: center;
+  background-color: #f8f5f0; /* Молочний фон для тексту */
+}
+
+.service-name {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.service-description {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 15px;
+  background-color: #eae8f5; /* Світлий фон для опису */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.service-price {
+  font-size: 16px;
+  color: #4e4c67; /* Темно-синій текст ціни */
+  margin-bottom: 15px;
+}
+
+.order-button {
+  background-color: #4e4c67; /* Темно-синій */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.order-button:hover {
+  background-color: #3c3a54; /* Темніший синій */
+}
+
+/* Кнопка підтримки */
+.support-button-container {
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin-top: 20px;
+}
+
+.support-button {
+  background-color: #4e4c67; /* Темно-синій фон */
   color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
-.App-link {
-  color: #61dafb;
+.support-button:hover {
+  background-color: #3c3a54; /* Темніший синій */
+}
+.service-page {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.service-details {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.service-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.service-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.service-description {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.service-price {
+  font-size: 18px;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+.order-form h2 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.submit-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
 }

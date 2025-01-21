@@ -1,53 +1,85 @@
+// App.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import ServicePage from './ServicePage'; // Імпортуємо компонент ServicePage
+
+import './App.css'; 
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
 function App() {
-  // Створення стану для зберігання послуг
   const [services, setServices] = useState([]);
 
-  // Функція для отримання даних з бекенда
   const fetchServices = async () => {
     try {
       const response = await axios.get("http://127.0.0.1:5000/services");
-      setServices(response.data); // Зберігаємо дані в стані
+      setServices(response.data);
     } catch (error) {
       console.error("Помилка при отриманні даних:", error);
     }
   };
 
-  // Викликаємо fetchServices при завантаженні компонента
   useEffect(() => {
     fetchServices();
   }, []);
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial" }}>
-      <h1>Список послуг</h1>
-      <div>
-        {services.map((service) => (
-          <div
-            key={service.service_id}
-            style={{
-              border: "1px solid #ddd",
-              borderRadius: "8px",
-              padding: "15px",
-              margin: "10px 0",
-            }}
-          >
-            <h2>{service.service_name}</h2>
-            <p>
-              <strong>Ціна:</strong> {service.service_price}
-            </p>
-            <p>
-              <strong>Опис:</strong> {service.service_p}
-            </p>
-            <a href={service.service_url} target="_blank" rel="noopener noreferrer">
-              Перейти на сайт
+    <Router>
+      <div className="app">
+        <header className="header">
+          <div className="logo">
+            <img src='/cropped-LOGO100x100-white-1.png' alt="Логотип" />
+          </div>
+          <div className="support-button-container">
+            <a 
+              href="https://t.me/Glazoff_com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="support-button"
+            >
+              Зв'язатися з підтримкою
             </a>
           </div>
-        ))}
+        </header>
+        
+        <main className="container">
+          <Routes>
+            <Route 
+              path="/" 
+              element={
+                <>
+                  <h1 className="title">Список послуг</h1>
+                  <div className="services-grid">
+                    {services.map((service) => (
+                      <div key={service.service_id} className="service-card">
+                        <img 
+                          src={service.service_image_url} 
+                          alt={service.service_name} 
+                          className="service-image"
+                        />
+                        <div className="service-details">
+                          <h2 className="service-name">{service.service_name}</h2>
+                          <p className="service-description">{service.service_p}</p>
+                          <p className="service-price"><strong>Ціна:</strong> {service.service_price}</p>
+                          <Link to={`/service/${service.service_id}`} className="order-button">
+                            Замовити послугу
+                          </Link>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              }
+            />
+            <Route 
+              path="/service/:serviceId" 
+              element={<ServicePage services={services} />} 
+            />
+          </Routes>
+        </main>
       </div>
-    </div>
+    </Router>
   );
 }
 
