@@ -3,6 +3,15 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+const userData = JSON.parse(window.Telegram.WebApp.initData);
+
+const userId = userData.user_id;
+const firstName = userData.first_name;
+const lastName = userData.last_name;
+const username = userData.username;
+
+console.log(`User ID: ${userId}, Full Name: ${firstName} ${lastName}, Username: ${username}`);
+
 function ServicePage({ services }) {
   const { serviceId } = useParams();
   const service = services?.find((s) => s.service_id === Number(serviceId));
