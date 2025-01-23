@@ -5,14 +5,14 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import './ServicePage.css';
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-const userData = JSON.parse(window.Telegram.WebApp.initData);
+// const userData = JSON.parse(window.Telegram.WebApp.initData);
 
-const userId = userData.user_id;
-const firstName = userData.first_name;
-const lastName = userData.last_name;
-const username = userData.username;
+// const userId = userData.user_id;
+// const firstName = userData.first_name;
+// const lastName = userData.last_name;
+// const username = userData.username;
 
-console.log(`User ID: ${userId}, Full Name: ${firstName} ${lastName}, Username: ${username}`);
+// console.log(`User ID: ${userId}, Full Name: ${firstName} ${lastName}, Username: ${username}`);
 
 function ServicePage({ services }) {
   const { serviceId } = useParams();
