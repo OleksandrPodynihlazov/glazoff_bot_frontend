@@ -32,7 +32,8 @@ function ServicePage({ services }) {
     console.log("FormData перед відправкою:", formData);
 
     try {
-      const response = await axios.post('http://127.0.0.1:5000/api/orders', formData);
+      // const response = await axios.post('http://127.0.0.1:5000/api/orders', formData);
+      const response = await axios.post('https://glazoff-bot-experimental.onrender.com/api/orders', formData);
 
       if (response.status === 200) {
         alert('Замовлення успішно оформлене');
