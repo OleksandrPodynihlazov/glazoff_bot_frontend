@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 function ServicePage({ services }) {
   const { serviceId } = useParams();
   const service = services?.find((s) => s.service_id === Number(serviceId));
