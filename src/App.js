@@ -13,8 +13,8 @@ function App() {
 
   const fetchServices = async () => {
     try {
+      // const response = await axios.get("https://glazoff-bot-experimental.onrender.com/services");
       const response = await axios.get("http://127.0.0.1:5000/services");
-      //const response = await axios.get("https://glazoff-bot-experimental.onrender.com/services");
       
       setServices(response.data); // Зберігаємо дані в стані
     } catch (error) {
@@ -31,7 +31,9 @@ function App() {
       <div className="app">
         <header className="header">
           <div className="logo">
+            <a href="https://glazoff.com/">
             <img src='/cropped-LOGO100x100-white-1.png' alt="Логотип" />
+            </a>
           </div>
           <div className="support-button-container">
             <a 
@@ -55,15 +57,17 @@ function App() {
                   <div className="services-grid">
                     {services.map((service) => (
                       <div key={service.service_id} className="service-card">
-                        <img 
-                          src={service.service_image_url} 
-                          alt={service.service_name} 
-                          className="service-image"
-                        />
+                        <div className="service-image-container">
+                          <img
+                            src={service.service_image_url}
+                            alt={service.service_name}
+                            className="service-image"
+                          />
+                        </div>
                         <div className="service-details">
                           <h2 className="service-name">{service.service_name}</h2>
-                          <p className="service-description">{service.service_p}</p>
-                          <p className="service-price"><strong>Ціна:</strong> {service.service_price}</p>
+                          <p className="service-price">{service.service_p}</p>
+                          <p className="service-description"><strong>Опис:</strong> {service.service_price}</p>
                           <Link to={`/service/${service.service_id}`} className="order-button">
                             Замовити послугу
                           </Link>
