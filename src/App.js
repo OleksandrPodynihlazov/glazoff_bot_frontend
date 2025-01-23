@@ -47,43 +47,43 @@ function App() {
           </div>
         </header>
 
-        <main className="container">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <h1 className="title">Список послуг</h1>
-                  <div className="services-grid">
-                    {services.map((service) => (
-                      <div key={service.service_id} className="service-card">
-                        <div className="service-image-container">
-                          <img
-                            src={service.service_image_url}
-                            alt={service.service_name}
-                            className="service-image"
-                          />
-                        </div>
-                        <div className="service-details">
-                          <h2 className="service-name">{service.service_name}</h2>
-                          <p className="service-price">{service.service_price}</p>
-                          <p className="service-description"><strong>Опис:</strong> {service.service_p}</p>
-                          <Link to={`/service/${service.service_id}`} onClick={() => window.scrollTo(0, 0)} className="order-button">
-                            Замовити послугу
-                          </Link>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </>
-              }
-            />
-            <Route
-              path="/service/:serviceId"
-              element={<ServicePage services={services} />}
-            />
-          </Routes>
-        </main>
+        // <main className="container">
+        //   <Routes>
+        //     <Route
+        //       path="/"
+        //       element={
+        //         <>
+        //           <h1 className="title">Список послуг</h1>
+        //           <div className="services-grid">
+        //             {services.map((service) => (
+        //               <div key={service.service_id} className="service-card">
+        //                 <div className="service-image-container">
+        //                   <img
+        //                     src={service.service_image_url}
+        //                     alt={service.service_name}
+        //                     className="service-image"
+        //                   />
+        //                 </div>
+        //                 <div className="service-details">
+        //                   <h2 className="service-name">{service.service_name}</h2>
+        //                   <p className="service-price">{service.service_price}</p>
+        //                   <p className="service-description"><strong>Опис:</strong> {service.service_p}</p>
+        //                   <Link to={`/service/${service.service_id}`} onClick={() => window.scrollTo(0, 0)} className="order-button">
+        //                     Замовити послугу
+        //                   </Link>
+        //                 </div>
+        //               </div>
+        //             ))}
+        //           </div>
+        //         </>
+        //       }
+        //     />
+        //     <Route
+        //       path="/service/:serviceId"
+        //       element={<ServicePage services={services} />}
+        //     />
+        //   </Routes>
+        // </main>
       </div>
     </Router>
   );
