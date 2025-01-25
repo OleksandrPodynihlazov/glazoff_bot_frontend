@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+
 import { Helmet } from 'react-helmet';
+
 
 function ServicePage({ services }) {
   const { serviceId } = useParams();
@@ -46,6 +48,7 @@ function ServicePage({ services }) {
     console.log("FormData перед відправкою:", formData);
 
     try {
+
       const response = await axios.post('https://glazoff-bot-experimental.onrender.com/api/orders', formData);
 
       if (response.status === 200) {
@@ -63,6 +66,7 @@ function ServicePage({ services }) {
 
   return (
     <div className="service-page">
+
       <Helmet>
         <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
       </Helmet>
@@ -112,6 +116,7 @@ function ServicePage({ services }) {
         </label>
         <button type="submit" className="submit-button">Замовити</button>
       </form>
+
     </div>
   );
 }
