@@ -4,15 +4,17 @@ import axios from "axios";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import ServicePage from './ServicePage'; // Імпортуємо компонент ServicePage
 import { Helmet } from 'react-helmet';
-
+import useTelegramInitData from "./telegramInitData";
 import './App.css';
 
 function App() {
   const [services, setServices] = useState([]);
 
+  const telegramData = useTelegramInitData();
+
   const fetchServices = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:5000/services");
+      const response = await axios.get("https://glazoff-bot-experimental.onrender.com/services");
 
       // const response = await axios.get("http://127.0.0.1:5000/services");
 
@@ -20,6 +22,11 @@ function App() {
     } catch (error) {
       console.error("Помилка при отриманні даних:", error);
     }
+  };
+
+  const sendDataToBot = () => {
+    const data = { action: "service_order", service_name: "Послуга 1" }; // Додайте свої дані
+    window.Telegram.WebApp.sendData(JSON.stringify(data)); // Відправляє дані на бота
   };
 
   useEffect(() => {
@@ -37,6 +44,9 @@ function App() {
             <a href="https://glazoff.com/">
               <img src='/cropped-LOGO100x100-white-1.png' alt="Логотип" />
             </a>
+            <button onClick={sendDataToBot} className="send-data-button">
+                    Надіслати дані на бота
+                  </button>
           </div>
           <div className="support-button-container">
             <a

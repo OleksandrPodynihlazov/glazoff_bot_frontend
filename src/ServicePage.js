@@ -22,14 +22,13 @@ function ServicePage({ services }) {
 
   // Використання хука для роботи з Telegram WebApp
   const telegramData = useTelegramInitData();
-
+ 
   useEffect(() => {
     // Заповнюємо форму даними з Telegram WebApp
     if (telegramData) {
       setFormData((prevData) => ({
         ...prevData,
         user_name: telegramData.firstName || "",
-        email: telegramData.username ? `${telegramData.username}@t.me` : "",
       }));
     }
   }, [telegramData]);
