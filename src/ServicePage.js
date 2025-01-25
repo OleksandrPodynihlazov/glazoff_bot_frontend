@@ -47,7 +47,7 @@ function ServicePage({ services }) {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:5000/api/orders",
+        "https://glazoff-bot-experimental.onrender.com/api/orders",
         formData
       );
 
