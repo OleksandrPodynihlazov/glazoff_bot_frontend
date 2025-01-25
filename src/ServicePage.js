@@ -66,6 +66,7 @@ function ServicePage({ services }) {
 
   return (
     <div className="service-page">
+
       <Helmet>
         <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
       </Helmet>
@@ -121,6 +122,7 @@ function ServicePage({ services }) {
           Замовити
         </button>
       </form>
+
     </div>
   );
 }
