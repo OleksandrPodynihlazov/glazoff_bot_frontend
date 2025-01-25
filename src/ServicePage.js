@@ -40,6 +40,10 @@ function ServicePage({ services }) {
       [name]: value,
     }));
   };
+  const sendDataToBot = () => {
+    const data = {action: "Замовлення успішно оформлене",service_name:"Назва послуги:" +formData.service_name,date: "Замовлення оформлено об:", email: "Замовлення оформлено на електронну адресу:"+formData.email,price:"Ціна:"+service.service_price}; // Додайте свої дані
+    window.Telegram.WebApp.sendData(JSON.stringify(data)); // Відправляє дані на бота
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -123,7 +127,7 @@ function ServicePage({ services }) {
               onChange={handleChange}
             ></textarea>
           </label>
-          <button type="submit" className="submit-button">Замовити</button>
+          <button onClick={sendDataToBot} type="submit" className="submit-button">Замовити</button>
         </form>
       </div>
     </div>

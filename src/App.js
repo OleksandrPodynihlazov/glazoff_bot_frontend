@@ -3,14 +3,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import ServicePage from './ServicePage'; // Імпортуємо компонент ServicePage
-import { Helmet } from 'react-helmet';
-import useTelegramInitData from "./telegramInitData";
 import './App.css';
 
 function App() {
   const [services, setServices] = useState([]);
 
-  const telegramData = useTelegramInitData();
 
   const fetchServices = async () => {
     try {
@@ -24,10 +21,7 @@ function App() {
     }
   };
 
-  const sendDataToBot = () => {
-    const data = { action: "service_order", service_name: "Послуга 1" }; // Додайте свої дані
-    window.Telegram.WebApp.sendData(JSON.stringify(data)); // Відправляє дані на бота
-  };
+
 
   useEffect(() => {
     fetchServices();
@@ -36,17 +30,12 @@ function App() {
   return (
     <Router>
       <div className="app">
-      <Helmet>
-          <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
-        </Helmet>
+
         <header className="header">
           <div className="logo">
             <a href="https://glazoff.com/">
               <img src='/cropped-LOGO100x100-white-1.png' alt="Логотип" />
             </a>
-            <button onClick={sendDataToBot} className="send-data-button">
-                    Надіслати дані на бота
-                  </button>
           </div>
           <div className="support-button-container">
             <a
