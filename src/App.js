@@ -7,8 +7,6 @@ import { Helmet } from 'react-helmet';
 
 import './App.css';
 
-<script src="https://telegram.org/js/telegram-web-app.js?56"></script>
-
 function App() {
   const [services, setServices] = useState([]);
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import "./ServicePage.css";
 
 // Хук для роботи з Telegram WebApp
 import useTelegramInitData from "./telegramInitData";
