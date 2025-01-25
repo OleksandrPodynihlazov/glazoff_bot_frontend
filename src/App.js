@@ -3,10 +3,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import ServicePage from './ServicePage'; // Імпортуємо компонент ServicePage
+import { Helmet } from 'react-helmet';
 
 import './App.css';
 
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://telegram.org/js/telegram-web-app.js?56"></script>
 
 function App() {
   const [services, setServices] = useState([]);
@@ -14,6 +15,7 @@ function App() {
   const fetchServices = async () => {
     try {
       const response = await axios.get("https://glazoff-bot-experimental.onrender.com/services");
+
       // const response = await axios.get("http://127.0.0.1:5000/services");
 
       setServices(response.data); // Зберігаємо дані в стані
@@ -29,6 +31,9 @@ function App() {
   return (
     <Router>
       <div className="app">
+      <Helmet>
+          <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
+        </Helmet>
         <header className="header">
           <div className="logo">
             <a href="https://glazoff.com/">

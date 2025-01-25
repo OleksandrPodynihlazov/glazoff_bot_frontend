@@ -1,18 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import './ServicePage.css';
 
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-// const userData = JSON.parse(window.Telegram.WebApp.initData);
+import { Helmet } from 'react-helmet';
 
-// const userId = userData.user_id;
-// const firstName = userData.first_name;
-// const lastName = userData.last_name;
-// const username = userData.username;
-
-// console.log(`User ID: ${userId}, Full Name: ${firstName} ${lastName}, Username: ${username}`);
 
 function ServicePage({ services }) {
   const { serviceId } = useParams();
@@ -26,6 +17,22 @@ function ServicePage({ services }) {
     details: ''
   });
 
+  useEffect(() => {
+    // Логіка для обробки даних користувача з Telegram Web App
+    const initData = window.Telegram?.WebApp?.initData || null;
+    if (initData) {
+      const userData = JSON.parse(decodeURIComponent(initData));
+      alert("Дані користувача:", userData);
+
+      // Використовуйте ці дані для своїх цілей
+      // const userId = userData.user_id;
+      // const firstName = userData.first_name;
+      // const lastName = userData.last_name;
+      // const username = userData.username;
+
+      // Ваш код для обробки цих даних
+    }
+  }, []); // Пустий масив залежностей, щоб виконувати лише один раз після завантаження компонента
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,7 +48,7 @@ function ServicePage({ services }) {
     console.log("FormData перед відправкою:", formData);
 
     try {
-      // const response = await axios.post('http://127.0.0.1:5000/api/orders', formData);
+
       const response = await axios.post('https://glazoff-bot-experimental.onrender.com/api/orders', formData);
 
       if (response.status === 200) {
@@ -59,61 +66,57 @@ function ServicePage({ services }) {
 
   return (
     <div className="service-page">
-      <div className="service-header">
-        <Link to={`/`} onClick={() => window.scrollTo(0, 0)} className="back-button">
-          На головну
-        </Link>
-        <h1>{service.service_name}</h1>
-        <img src={service.service_image_url} alt={service.service_name} />
-      </div>
 
-      <div className="service-info">
-        <p><strong>Опис:</strong> {service.service_p}</p>
-        <p><strong>Ціна:</strong> {service.service_price}</p>
+      <Helmet>
+        <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
+      </Helmet>
+      <h1>{service.service_name}</h1>
+      <img src={service.service_image_url} alt={service.service_name} />
+      <p><strong>Ціна:</strong> {service.service_price}</p>
+      <p><strong>Опис:</strong> {service.service_p}</p>
 
-        <form className="order-form" onSubmit={handleSubmit}>
-          <p></p>
-          <label className="order-form-label">
-            Ім'я*:
-            <input
-              type="text"
-              name="user_name"
-              value={formData.user_name}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label className="order-form-label">
-            Пошта*:
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label className="order-form-label">
-            Номер телефону*:
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label className="order-form-label">
-            Додаткові побажання:
-            <textarea
-              name="details"
-              value={formData.details}
-              onChange={handleChange}
-            ></textarea>
-          </label>
-          <button type="submit" className="submit-button">Замовити</button>
-        </form>
-      </div>
+      <form className="order-form" onSubmit={handleSubmit}>
+        <label>
+          Ім'я:
+          <input 
+            type="text" 
+            name="user_name" 
+            value={formData.user_name} 
+            onChange={handleChange} 
+            required 
+          />
+        </label>
+        <label>
+          Пошта:
+          <input 
+            type="email" 
+            name="email" 
+            value={formData.email} 
+            onChange={handleChange} 
+            required 
+          />
+        </label>
+        <label>
+          Номер телефону:
+          <input 
+            type="tel" 
+            name="phone" 
+            value={formData.phone} 
+            onChange={handleChange} 
+            required 
+          />
+        </label>
+        <label>
+          Додаткові побажання:
+          <textarea 
+            name="details" 
+            value={formData.details} 
+            onChange={handleChange} 
+          ></textarea>
+        </label>
+        <button type="submit" className="submit-button">Замовити</button>
+      </form>
+
     </div>
   );
 }
