@@ -1,44 +1,44 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import "./ServicePage.css";
 
-import { Helmet } from 'react-helmet';
-
+// Хук для роботи з Telegram WebApp
+import useTelegramInitData from "./telegramInitData";
 
 function ServicePage({ services }) {
   const { serviceId } = useParams();
   const service = services?.find((s) => s.service_id === Number(serviceId));
 
   const [formData, setFormData] = useState({
-    service_name: service?.service_name || '',
-    user_name: '',
-    email: '',
-    phone: '',
-    details: ''
+    service_name: service?.service_name || "",
+    user_name: "",
+    email: "",
+    phone: "",
+    details: "",
   });
 
+  // Використання хука для роботи з Telegram WebApp
+  const telegramData = useTelegramInitData();
+
   useEffect(() => {
-    // Логіка для обробки даних користувача з Telegram Web App
-    const initData = window.Telegram?.WebApp?.initData || null;
-    if (initData) {
-      const userData = JSON.parse(decodeURIComponent(initData));
-      alert("Дані користувача:", userData);
-
-      // Використовуйте ці дані для своїх цілей
-      // const userId = userData.user_id;
-      // const firstName = userData.first_name;
-      // const lastName = userData.last_name;
-      // const username = userData.username;
-
-      // Ваш код для обробки цих даних
+    // Заповнюємо форму даними з Telegram WebApp
+    if (telegramData) {
+      setFormData((prevData) => ({
+        ...prevData,
+        user_name: telegramData.firstName || "",
+        email: telegramData.username ? `${telegramData.username}@t.me` : "",
+      }));
     }
-  }, []); // Пустий масив залежностей, щоб виконувати лише один раз після завантаження компонента
+  }, [telegramData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -48,15 +48,17 @@ function ServicePage({ services }) {
     console.log("FormData перед відправкою:", formData);
 
     try {
-
-      const response = await axios.post('https://glazoff-bot-experimental.onrender.com/api/orders', formData);
+      const response = await axios.post(
+        "https://glazoff-bot-experimental.onrender.com/api/orders",
+        formData
+      );
 
       if (response.status === 200) {
-        alert('Замовлення успішно оформлене');
+        alert("Замовлення успішно оформлене");
       }
     } catch (error) {
       console.error("Помилка при відправці форми:", error);
-      alert('Щось пішло не так, спробуйте пізніше');
+      alert("Щось пішло не так, спробуйте пізніше");
     }
   };
 
@@ -70,53 +72,61 @@ function ServicePage({ services }) {
       <Helmet>
         <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
       </Helmet>
-      <h1>{service.service_name}</h1>
-      <img src={service.service_image_url} alt={service.service_name} />
-      <p><strong>Ціна:</strong> {service.service_price}</p>
-      <p><strong>Опис:</strong> {service.service_p}</p>
+      <div className="service-header">
+        <Link to={`/`} onClick={() => window.scrollTo(0, 0)} className="back-button">
+          На головну
+        </Link>
+        <h1>{service.service_name}</h1>
+        <img src={service.service_image_url} alt={service.service_name} />
+      </div>
 
-      <form className="order-form" onSubmit={handleSubmit}>
-        <label>
-          Ім'я:
-          <input 
-            type="text" 
-            name="user_name" 
-            value={formData.user_name} 
-            onChange={handleChange} 
-            required 
-          />
-        </label>
-        <label>
-          Пошта:
-          <input 
-            type="email" 
-            name="email" 
-            value={formData.email} 
-            onChange={handleChange} 
-            required 
-          />
-        </label>
-        <label>
-          Номер телефону:
-          <input 
-            type="tel" 
-            name="phone" 
-            value={formData.phone} 
-            onChange={handleChange} 
-            required 
-          />
-        </label>
-        <label>
-          Додаткові побажання:
-          <textarea 
-            name="details" 
-            value={formData.details} 
-            onChange={handleChange} 
-          ></textarea>
-        </label>
-        <button type="submit" className="submit-button">Замовити</button>
-      </form>
+      <div className="service-info">
+        <p><strong>Опис:</strong> {service.service_p}</p>
+        <p><strong>Ціна:</strong> {service.service_price}</p>
 
+        <form className="order-form" onSubmit={handleSubmit}>
+          <p></p>
+          <label className="order-form-label">
+            Ім'я*:
+            <input
+              type="text"
+              name="user_name"
+              value={formData.user_name}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label className="order-form-label">
+            Пошта*:
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label className="order-form-label">
+            Номер телефону*:
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label className="order-form-label">
+            Додаткові побажання:
+            <textarea
+              name="details"
+              value={formData.details}
+              onChange={handleChange}
+            ></textarea>
+          </label>
+          <button type="submit" className="submit-button">Замовити</button>
+        </form>
+      </div>
     </div>
   );
 }
