@@ -3,10 +3,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import ServicePage from './ServicePage'; // Імпортуємо компонент ServicePage
+import { Helmet } from 'react-helmet';
 
 import './App.css'; 
 
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://telegram.org/js/telegram-web-app.js?56"></script>
 
 function App() {
   const [services, setServices] = useState([]);
@@ -29,6 +30,9 @@ function App() {
   return (
     <Router>
       <div className="app">
+      <Helmet>
+          <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
+        </Helmet>
         <header className="header">
           <div className="logo">
             <img src='/cropped-LOGO100x100-white-1.png' alt="Логотип" />
