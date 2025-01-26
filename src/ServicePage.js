@@ -30,7 +30,8 @@ function ServicePage({ services }) {
       setFormData((prevData) => ({
         ...prevData,
         tgFullname: telegramData.lastName ? `${telegramData.firstName ?? ''} ${telegramData.lastName ?? ''}`.trim() : telegramData.firstName,
-        tgUsername: telegramData.tgUsername
+        tgUsername: telegramData.tgUsername,
+        tgId: telegramData.userId
       }));
     }
   }, [telegramData]);
@@ -44,7 +45,10 @@ function ServicePage({ services }) {
     }));
   };
   const sendDataToBot = () => {
-    const data = {action: "Замовлення успішно оформлене",service_name:"Назва послуги:" +formData.service_name,date: "Замовлення оформлено об:", email: "Замовлення оформлено на електронну адресу:"+formData.email,price:"Ціна:"+service.service_price}; // Додайте свої дані
+    const data = {action:"Замовлення успішно оформлене",service:service.service_name,user_name:formData.user_name,
+      email:formData.email,phone:formData.phone,details:formData.details,
+      telegram_id:formData.tgId,tgFullname:formData.tgFullname,tgUsername:formData.tgUsername,order_date:formData.order_date}; 
+
     window.Telegram.WebApp.sendData(JSON.stringify(data)); // Відправляє дані на бота
   };
 
