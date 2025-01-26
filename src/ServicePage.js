@@ -87,7 +87,9 @@ function ServicePage({ services }) {
           На головну
         </Link>
         <h1>{service.service_name}</h1>
-        <img src={service.service_image_url} alt={service.service_name} />
+        <div className="service-image-container">
+          <img src={service.service_image_url} alt={service.service_name} />
+        </div>
       </div>
 
       <div className="service-info">

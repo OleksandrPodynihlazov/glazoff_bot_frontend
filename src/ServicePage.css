@@ -15,6 +15,10 @@
     margin-bottom: 15px;
 }
 
+img {
+    width: 100%;
+}
+
 .back-button {
     background-color: #007bff;
     color: white;
@@ -51,6 +55,7 @@
     flex-direction: column;
     justify-content: space-between;
     margin-bottom: 20px;
+    font-size: 20px;
 }
 
 .service-description {
@@ -114,4 +119,48 @@ form textarea {
 
 .submit-button:hover {
     background-color: #0056b3;
+}
+
+@media (max-width: 450px) {
+    h1 {
+        font-size: 22px;
+    }
+    .order-form {
+        width: 80%;
+    }
+
+    .submit-button {
+        width: 45%;
+        padding: 12px 12px;
+        font-size: 12px;
+    }
+
+    .service-info {
+        font-size: 14px;
+    }
+
+    .order-form-label {
+        font-size: 12px;
+    }
+}
+
+@media (min-width: 450px) and (max-width: 768px) {
+    h1 {
+        font-size: 24px;
+    }
+    .order-form {
+        width: 60%;
+    }
+
+    .submit-button {
+        width: 45%;
+    }
+
+    .service-info {
+        font-size: 16px;
+    }
+
+    .order-form-label {
+        font-size: 14px;
+    }
 }
