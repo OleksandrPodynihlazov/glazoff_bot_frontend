@@ -11,6 +11,7 @@ import useTelegramInitData from "./telegramInitData";
 function ServicePage({ services }) {
   const { serviceId } = useParams();
   const service = services?.find((s) => s.service_id === Number(serviceId));
+  const currentDateTime = new Date().toString()
 
   const [formData, setFormData] = useState({
     service_name: service?.service_name || "",
@@ -28,8 +29,8 @@ function ServicePage({ services }) {
     if (telegramData) {
       setFormData((prevData) => ({
         ...prevData,
-        user_name: telegramData.firstName || "",
-        email: telegramData.username ? `${telegramData.username}@t.me` : "",
+        tgFullname: telegramData.lastName ? `${telegramData.firstName ?? ''} ${telegramData.lastName ?? ''}`.trim() : telegramData.firstName,
+        tgUsername: telegramData.tgUsername
       }));
     }
   }, [telegramData]);
@@ -39,6 +40,7 @@ function ServicePage({ services }) {
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
+      order_date: currentDateTime
     }));
   };
 
