@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import ServicePage from './ServicePage'; // Імпортуємо компонент ServicePage
 import './App.css';
 
@@ -29,6 +30,9 @@ function App() {
   return (
     <Router>
       <div className="app">
+      <Helmet>
+        <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
+      </Helmet>
         <header className="header">
           <div className="logo">
             <a href="https://glazoff.com/">
