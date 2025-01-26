@@ -13,7 +13,7 @@ function App() {
     try {
 
       const response = await axios.get("https://glazoff-bot-experimental.onrender.com/services");
-      
+
       setServices(response.data); // Зберігаємо дані в стані
     } catch (error) {
       console.error("Помилка при отриманні даних:", error);
@@ -29,9 +29,6 @@ function App() {
   return (
     <Router>
       <div className="app">
-        <Helmet>
-          <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
-        </Helmet>
         <header className="header">
           <div className="logo">
             <a href="https://glazoff.com/">
