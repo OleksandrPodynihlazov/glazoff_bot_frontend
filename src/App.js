@@ -12,9 +12,9 @@ function App() {
 
   const fetchServices = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:5000/services");
+      // const response = await axios.get("http://127.0.0.1:10000/services");
 
-      // const response = await axios.get("http://127.0.0.1:5000/services");
+      const response = await axios.get("https://glazoff-bot-experimental.onrender.com");
 
       setServices(response.data); // Зберігаємо дані в стані
     } catch (error) {
@@ -29,7 +29,7 @@ function App() {
   return (
     <Router>
       <div className="app">
-      <Helmet>
+        <Helmet>
           <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
         </Helmet>
         <header className="header">
@@ -87,6 +87,18 @@ function App() {
             />
           </Routes>
         </main>
+        <footer>
+          <div className="footer">
+            <div>
+              <p>
+                &copy; 2025 <a href="https://glazoff.com/">Glazoff</a>
+              </p>
+            </div>
+            <p>
+              Developers: <a href="https://t.me/AlexGlazoff">@AlexGlazoff</a>, <a href="https://t.me/s_h_3_v_a">@s_h_3_v_a</a>
+            </p>
+          </div>
+        </footer>
       </div>
     </Router>
   );
