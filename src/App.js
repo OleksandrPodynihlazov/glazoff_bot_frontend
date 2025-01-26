@@ -88,6 +88,18 @@ function App() {
             />
           </Routes>
         </main>
+        <footer>
+          <div className="footer">
+            <div>
+              <p>
+                &copy; 2025 <a href="https://glazoff.com/">Glazoff</a>
+              </p>
+            </div>
+            <p>
+              Developers: <a href="https://t.me/AlexGlazoff">@AlexGlazoff</a>, <a href="https://t.me/s_h_3_v_a">@s_h_3_v_a</a>
+            </p>
+          </div>
+        </footer>
       </div>
     </Router>
   );
