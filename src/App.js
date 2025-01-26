@@ -13,10 +13,7 @@ function App() {
     try {
 
       const response = await axios.get("https://glazoff-bot-experimental.onrender.com/services");
-
-
-      const response = await axios.get("https://glazoff-bot-experimental.onrender.com");
-
+      
       setServices(response.data); // Зберігаємо дані в стані
     } catch (error) {
       console.error("Помилка при отриманні даних:", error);
