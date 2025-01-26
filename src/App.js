@@ -3,16 +3,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import ServicePage from './ServicePage'; // Імпортуємо компонент ServicePage
-import { Helmet } from 'react-helmet';
-
 import './App.css';
 
 function App() {
   const [services, setServices] = useState([]);
 
+
   const fetchServices = async () => {
     try {
-      // const response = await axios.get("http://127.0.0.1:10000/services");
+
+      const response = await axios.get("https://glazoff-bot-experimental.onrender.com/services");
+
 
       const response = await axios.get("https://glazoff-bot-experimental.onrender.com");
 
@@ -21,6 +22,8 @@ function App() {
       console.error("Помилка при отриманні даних:", error);
     }
   };
+
+
 
   useEffect(() => {
     fetchServices();
