@@ -121,6 +121,11 @@ form textarea {
     background-color: #0056b3;
 }
 
+.submit-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
 @media (max-width: 450px) {
     h1 {
         font-size: 22px;

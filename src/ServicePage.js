@@ -23,7 +23,7 @@ function ServicePage({ services }) {
 
   // Використання хука для роботи з Telegram WebApp
   const telegramData = useTelegramInitData();
- 
+
   useEffect(() => {
     // Заповнюємо форму даними з Telegram WebApp
     if (telegramData) {
@@ -44,6 +44,7 @@ function ServicePage({ services }) {
       order_date: currentDateTime
     }));
   };
+
   const sendDataToBot = () => {
     const data = {action:"Замовлення успішно оформлене",service:service.service_name,user_name:formData.user_name,
       email:formData.email,phone:formData.phone,details:formData.details,
@@ -75,6 +76,12 @@ function ServicePage({ services }) {
   if (!service) {
     return <h2>Послуга не знайдена</h2>;
   }
+
+  const isFormValid = () => {
+    return formData.user_name.trim() !== '' &&
+           formData.email.trim() !== '' &&
+           formData.phone.trim() !== '';
+  };
 
   return (
     <div className="service-page">
@@ -136,7 +143,7 @@ function ServicePage({ services }) {
               onChange={handleChange}
             ></textarea>
           </label>
-          <button onClick={sendDataToBot} type="submit" className="submit-button">Замовити</button>
+          <button onClick={sendDataToBot} type="submit" className="submit-button" disabled={!isFormValid()}>Замовити</button>
         </form>
       </div>
     </div>
