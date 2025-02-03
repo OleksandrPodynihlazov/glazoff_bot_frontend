@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function useTelegramInitData() {
   const [telegramData, setTelegramData] = useState(null);
@@ -7,21 +7,18 @@ function useTelegramInitData() {
     const loadTelegramData = () => {
       if (window.Telegram?.WebApp) {
         console.log("Telegram WebApp доступний");
-        
-        // Отримуємо initData з Telegram WebApp
+
         const initData = window.Telegram.WebApp.initData;
         console.log("initData:", initData);
 
         if (initData) {
           try {
-            // Декодуємо параметр `user` з initData
             const params = new URLSearchParams(initData);
             const userDataString = params.get("user");
             const userData = JSON.parse(decodeURIComponent(userDataString));
-            
+
             console.log("Розпарсені дані користувача:", userData);
 
-            // Ваш код для обробки цих даних
             const userId = userData.id;
             const firstName = userData.first_name;
             const lastName = userData.last_name;
@@ -39,7 +36,6 @@ function useTelegramInitData() {
       }
     };
 
-    // Завантажуємо скрипт Telegram WebApp і чекаємо, поки він стане доступним
     const script = document.createElement("script");
     script.src = "https://telegram.org/js/telegram-web-app.js?56";
     script.async = true;
@@ -59,6 +55,7 @@ function useTelegramInitData() {
       document.head.removeChild(script);
     };
   }, []);
+
   return telegramData;
 }
 
