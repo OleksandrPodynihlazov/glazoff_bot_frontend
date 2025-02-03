@@ -23,6 +23,7 @@ function ServicePage({ services }) {
 
   // Використання хука для роботи з Telegram WebApp
   const telegramData = useTelegramInitData();
+  console.log("telegramData:", telegramData);
  
   useEffect(() => {
     // Заповнюємо форму даними з Telegram WebApp
@@ -45,9 +46,18 @@ function ServicePage({ services }) {
     }));
   };
   const sendDataToBot = () => {
-    const data = {action:"Замовлення успішно оформлене",service:service.service_name,user_name:formData.user_name,
-      email:formData.email,phone:formData.phone,details:formData.details,
-      telegram_id:formData.tgId,tgFullname:formData.tgFullname,tgUsername:formData.tgUsername,order_date:formData.order_date}; 
+    const data = {
+      action:"Замовлення успішно оформлене",
+      service:service.service_name,
+      user_name:formData.user_name,
+      email:formData.email,
+      phone:formData.phone,
+      details:formData.details,
+      telegram_id:formData.tgId,
+      tgFullname:formData.tgFullname,
+      tgUsername:formData.tgUsername,
+      order_date:formData.order_date
+    }; 
 
     window.Telegram.WebApp.sendData(JSON.stringify(data)); // Відправляє дані на бота
   };
