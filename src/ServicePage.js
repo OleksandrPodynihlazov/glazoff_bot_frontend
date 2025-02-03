@@ -47,18 +47,18 @@ function ServicePage({ services }) {
   };
   const sendDataToBot = () => {
     const data = {
-      action:"Замовлення успішно оформлене",
-      service:service.service_name,
-      user_name:formData.user_name,
-      email:formData.email,
-      phone:formData.phone,
-      details:formData.details,
-      telegram_id:formData.tgId,
-      tgFullname:formData.tgFullname,
-      tgUsername:formData.tgUsername,
-      order_date:formData.order_date
-    }; 
-
+      action: "Замовлення успішно оформлене",
+      service: service.service_name,
+      user_name: formData.user_name,
+      email: formData.email,
+      phone: formData.phone,
+      details: formData.details,
+      tgFullname: formData.tgFullname,
+      tgUsername: formData.tgUsername,
+      tgId: formData.tgId,
+      order_date: formData.order_date
+    };
+    console.log("Data to send:", data);
     window.Telegram.WebApp.sendData(JSON.stringify(data)); // Відправляє дані на бота
   };
 
