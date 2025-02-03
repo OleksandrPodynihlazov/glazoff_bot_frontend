@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 
 function useTelegramInitData() {
+  const [telegramData, setTelegramData] = useState(null);
+
   useEffect(() => {
     const loadTelegramData = () => {
       if (window.Telegram?.WebApp) {
@@ -25,7 +27,7 @@ function useTelegramInitData() {
             const lastName = userData.last_name;
             const tgUsername = userData.username;
 
-            console.log({ userId, firstName, lastName, tgUsername });
+            setTelegramData({ userId, firstName, lastName, tgUsername });
           } catch (error) {
             console.error("Помилка при розборі initData:", error);
           }
@@ -57,6 +59,7 @@ function useTelegramInitData() {
       document.head.removeChild(script);
     };
   }, []);
+  return telegramData;
 }
 
 export default useTelegramInitData;
